@@ -45,7 +45,7 @@ Essa separação proporciona alta coesão e baixo acoplamento, facilitando a man
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/clinic-user-managment-ms.git
+   git clone https://github.com/LeoGomes0919/clinic-user-managment-ms.git
    cd clinic-user-managment-ms
    ```
    
