@@ -1,0 +1,11 @@
+{
+  "openapi": {
+    "info": {
+      "title": "clinic-user-managment-ms",
+      "version": "1.0.0",
+      "description": "Microservice for managing patients in a clinic"
+    }
+  },
+  "routerDoc": "/api/docs",
+  "routerPrefix": "/api"
+}
