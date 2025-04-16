@@ -1,7 +1,8 @@
 import z from 'zod'
 import { IBaseRegisterSchema } from './../../dtos/IBaseRegisterSchema'
 
-export const doctorSchema = Object.assign(IBaseRegisterSchema, {
+export const doctorSchema = {
+  ...IBaseRegisterSchema,
   params: z.object({
     id: z.string().uuid(),
   }),
@@ -9,18 +10,16 @@ export const doctorSchema = Object.assign(IBaseRegisterSchema, {
     page: z.coerce.number().default(1).optional(),
     limit: z.coerce.number().default(10).optional(),
   }),
-  body: z
-    .object({
-      crm: z
-        .string()
-        .nonempty('CRM is required')
-        .min(5, 'CRM must have at least 5 characters'),
-      specialty: z
-        .string()
-        .nonempty('Specialty is required')
-        .min(3, 'Specialty must have at least 3 characters'),
-    })
-    .merge(IBaseRegisterSchema.body as z.ZodObject<any>),
+  body: IBaseRegisterSchema.body.extend({
+    crm: z
+      .string()
+      .nonempty('CRM is required')
+      .min(5, 'CRM must have at least 5 characters'),
+    specialty: z
+      .string()
+      .nonempty('Specialty is required')
+      .min(3, 'Specialty must have at least 3 characters'),
+  }),
   bodyUpdate: z.object({
     name: z
       .string()
@@ -50,4 +49,4 @@ export const doctorSchema = Object.assign(IBaseRegisterSchema, {
       .nonempty('Specialty is required')
       .min(3, 'Specialty must have at least 3 characters'),
   }),
-})
+}

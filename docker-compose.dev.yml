@@ -1,5 +1,6 @@
 services:
-  db:
+  user-db:
+    container_name: clinic-user-db
     image: postgres:15-alpine
     restart: always
     env_file: 
@@ -11,38 +12,41 @@ services:
     ports:
       - "${DB_PORT:-5432}:5432"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db-data-users:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - clinic-network
+    
   clinic-user-managment-ms:
     build: 
       context: .
       dockerfile: Dockerfile.dev
     working_dir: /home/node/app
     container_name: clinic-user-managment-ms
+    env_file: 
+      - .env
     depends_on:
-      db:
+      user-db:
         condition: service_healthy
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
     ports:
       - "${PORT:-3000}:3000"
     volumes:
       - .:/home/node/app
-      - /home/node/app/node_modules
     command: >
       sh -c "echo 'Waiting for DB to be ready...' &&
       sleep 10 &&
       npm run typeorm migration:run && npm run dev
       "
+    networks:
+      - clinic-network
 
 volumes:
-  db-data:
+  db-data-users:
+
+networks:
+  clinic-network:
+   external: true

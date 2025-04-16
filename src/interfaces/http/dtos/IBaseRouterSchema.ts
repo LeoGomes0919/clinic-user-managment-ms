@@ -1,9 +1,9 @@
 import { ZodObject, ZodRawShape, ZodType } from 'zod'
 
 export interface IBaseRouterSchema {
-  headers?: ZodObject<ZodRawShape> | ZodType<null>
-  query?: ZodObject<ZodRawShape> | ZodType<null>
-  params?: ZodObject<ZodRawShape> | ZodType<null>
-  body?: ZodObject<ZodRawShape> | ZodType<null>
+  headers?: ZodObject<ZodRawShape>
+  query?: ZodObject<ZodRawShape>
+  params?: ZodObject<ZodRawShape>
+  body?: ZodObject<ZodRawShape>
   response: Record<number, ZodObject<ZodRawShape>>
 }

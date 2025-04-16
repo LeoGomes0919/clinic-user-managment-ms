@@ -1,7 +1,8 @@
 import z from 'zod'
 import { IBaseRegisterSchema } from './../../dtos/IBaseRegisterSchema'
 
-export const patientSchema = Object.assign(IBaseRegisterSchema, {
+export const patientSchema = {
+  ...IBaseRegisterSchema,
   params: z.object({
     id: z.string().uuid(),
   }),
@@ -24,4 +25,4 @@ export const patientSchema = Object.assign(IBaseRegisterSchema, {
       invalid_type_error: 'Invalid birth date',
     }),
   }),
-})
+}
