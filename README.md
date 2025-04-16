@@ -2,6 +2,15 @@
 
 O **Clinic User Management Microservice** é um microserviço dedicado à gestão de usuários para clínicas e instituições de saúde. Ele gerencia o cadastro, atualização e consulta de perfis (pacientes, médicos) e é desenvolvido utilizando os princípios do Domain-Driven Design (DDD) e da Clean Architecture, garantindo uma clara separação de responsabilidades entre as diferentes camadas do sistema.
 
+Deve ser criado uma rede no Docker para que os dois microsserviços possam se comunicar.
+```bash
+docker network create clinic-network
+```
+Caso já tenha criado a rede, você pode verificar com o seguinte comando:
+```bash
+docker network ls
+```
+
 ## Sumário
 - [Clinic User Management Microservice](#clinic-user-management-microservice)
   - [Sumário](#sumário)
